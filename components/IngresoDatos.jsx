@@ -25,6 +25,9 @@ function IngresoDatos() {
 
     return (
         <View>
+            <View style={styles.containerArriba}>
+                
+            </View>
             <View style={styles.containerMedio}>
                 
             </View>
@@ -130,14 +133,19 @@ function IngresoDatos() {
 }
 
 const styles = StyleSheet.create({
+    containerArriba: {
+        width: windowWidth,
+        height: windowHeight * 0.20,
+        backgroundColor: 'green',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+    },
     containerMedio: {
         width: windowWidth,
-        height: windowHeight * 0.2,
+        height: windowHeight * 0.15,
         backgroundColor: 'red',
         alignItems: 'center',
         justifyContent: 'flex-end',
-        borderTopStartRadius: 30,
-        borderTopEndRadius: 30,
     },
     containerAbajo: {
         width: windowWidth,
