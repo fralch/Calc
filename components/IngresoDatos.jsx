@@ -18,7 +18,7 @@ function IngresoDatos() {
         setButtonsEnabled(true);
     }
     useEffect(() => {
-        console.log(datos);
+        // console.log(datos);
     }, [datos])
 
 
@@ -29,7 +29,13 @@ function IngresoDatos() {
                 
             </View>
             <View style={styles.containerMedio}>
-                
+                {
+                    datos.map((dato, index) => {
+                        return (
+                            <Text key={index} style={{ fontSize: 45, color: (typeof dato == 'number'? 'white' : 'green'), margin:3 }}>{dato}</Text>
+                        )
+                    })
+                }
             </View>
             <View style={styles.containerAbajo}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginLeft: 20 }}>
@@ -143,9 +149,10 @@ const styles = StyleSheet.create({
     containerMedio: {
         width: windowWidth,
         height: windowHeight * 0.15,
-        backgroundColor: 'red',
+        backgroundColor: '#22252D',
         alignItems: 'center',
         justifyContent: 'flex-end',
+        flexDirection: 'row',
     },
     containerAbajo: {
         width: windowWidth,
