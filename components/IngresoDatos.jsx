@@ -26,14 +26,16 @@ function IngresoDatos() {
     const botonCalculos = () => {
         let calculos = [];
         let concatenat = '';
-        datos.forEach(element => {
-            if (typeof element == 'number') {
-                concatenat += element;
+        for (let i = 0; i < datos.length; i++) {
+            if (typeof datos[i] == 'number') {
+                concatenat += datos[i];
             }
-            if(typeof element == 'string' && element != 'back'){
-                calculos.push(element);
+            if (typeof datos[i] == 'string' && datos[i] != 'back') {
+                calculos.push(concatenat);
+                calculos.push(datos[i]);
+                concatenat = '';
             }
-        });
+        }
         calculos.push(concatenat);
         concatenat = '';
         console.log(calculos);
