@@ -21,7 +21,10 @@ function IngresoDatos() {
         // console.log(datos);
     }, [datos])
 
-
+    const botonC= () => {
+        console.log("botonC"); 
+        setDatos([]);
+    }
 
     return (
         <View>
@@ -40,7 +43,7 @@ function IngresoDatos() {
             <View style={styles.containerAbajo}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginLeft: 20 }}>
                     <ScrollView horizontal={true} onScroll={bloqueandoBotones} showsHorizontalScrollIndicator={false} onMomentumScrollEnd={desbloqueandoBotones}>
-                        <TouchableOpacity style={styles.boton} disabled={!buttonsEnabled} onPress={() => { setDatos([...datos, "C"]); }}>
+                        <TouchableOpacity style={styles.boton} disabled={!buttonsEnabled} onPress={ () => {botonC()}}>
                             <Text style={{ fontSize: 28, color: 'red' }}>C</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.boton} disabled={!buttonsEnabled} onPress={() => { setDatos([...datos, "back"]); }}>
