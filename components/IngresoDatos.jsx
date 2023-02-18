@@ -11,6 +11,8 @@ function IngresoDatos() {
     const [buttonsEnabled, setButtonsEnabled] = useState(true);
     const [datos, setDatos] = useState([]);
     const [datosPatalla, setDatosPantalla] = useState(null);
+    const [calculos, setCalculos] = useState([]);
+    const [resultado, setResultado] = useState(0);
 
     const bloqueandoBotones = (event) => {
         setButtonsEnabled(false);
@@ -41,7 +43,7 @@ function IngresoDatos() {
         calculos.push(concatenat);
         concatenat = '';
         
-        console.log(calculos);
+        setCalculos(calculos);
     }
     const backBotton = () => {
         let datosTemp = datos;
@@ -58,6 +60,58 @@ function IngresoDatos() {
         }
         setDatosPantalla(pantalla);
     }
+
+    const calcularDatos = () => {
+        let calculosTemp = calculos;
+        let resultado = 0;
+        let operador = '';
+        let numero = 0;
+        for (let i = 0; i < calculosTemp.length; i++) {
+            if (typeof calculosTemp[i] == 'number') {
+                numero = calculosTemp[i];
+            }
+            if (typeof calculosTemp[i] == 'string') {
+                operador = calculosTemp[i];
+            }
+            switch (operador) {
+                case '+':
+                    resultado += numero;
+                    break;
+                case '-':
+                    resultado -= numero;
+                    break;
+                case 'x':
+                    resultado *= numero;
+                    break;
+                case '/':
+                    resultado /= numero;
+                    break;
+                case '%':
+                    resultado = (resultado * numero) / 100;
+                    break;
+                case '√':
+                    resultado = Math.sqrt(numero);
+                    break;
+                case '^':
+                    resultado = Math.pow(resultado, numero);
+                    break;
+                case 'x!':
+                    resultado = factorial(numero);
+                    break;
+                case 'π':
+                    resultado = Math.PI * numero;
+                    break;
+                case 'lg':
+                    resultado = Math.log10(numero);
+                    break;
+                case 'ln':
+                    resultado = Math.log(numero);
+                    break;
+            }
+        }
+        console.log(resultado);
+        setDatos([resultado]);
+    }
     
     useEffect(() => {
         pantalla();
@@ -71,11 +125,6 @@ function IngresoDatos() {
             </View>
             <View style={styles.containerMedio}>
                 {
-                    // datos.map((dato, index) => {
-                    //     return (
-                    //         <Text key={index} style={{ fontSize: 45, color: (typeof dato == 'number'? 'white' : 'green'), margin:3 }}>{dato}</Text>
-                    //     )
-                    // })
                     <Text style={{ fontSize: 45, color: '#aaa', margin: 3 }}>{datosPatalla}</Text>
                 }
             </View>
@@ -169,7 +218,7 @@ function IngresoDatos() {
                     <TouchableOpacity style={styles.boton} onPress={() => { setDatos([...datos, 0]); }}>
                         <Text style={{ fontSize: 28, color: 'white' }}>0</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={[styles.boton, { width: windowWidth * 0.4 }]} onPress={() => { botonCalculos() }}>
+                    <TouchableOpacity style={[styles.boton, { width: windowWidth * 0.4 }]} onPress={() => { calcularDatos() }}>
                         <Text style={{ fontSize: 28, color: 'red' }}>{"="}</Text>
                     </TouchableOpacity>
 
