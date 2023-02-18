@@ -10,6 +10,7 @@ const windowHeight = Dimensions.get('window').height;
 function IngresoDatos() {
     const [buttonsEnabled, setButtonsEnabled] = useState(true);
     const [datos, setDatos] = useState([]);
+    const [datosPatalla, setDatosPantalla] = useState(null);
 
     const bloqueandoBotones = (event) => {
         setButtonsEnabled(false);
@@ -35,13 +36,34 @@ function IngresoDatos() {
                 calculos.push(datos[i]);
                 concatenat = '';
             }
+           
         }
         calculos.push(concatenat);
         concatenat = '';
-        console.log(calculos);
         
+        console.log(calculos);
+    }
+    const backBotton = () => {
+        let datosTemp = datos;
+        datosTemp.pop();
+        setDatos(datosTemp);
+        pantalla();
 
     }
+
+    const pantalla = () => {
+        let pantalla = '';
+        for (let i = 0; i < datos.length; i++) {
+            pantalla += datos[i];
+        }
+        setDatosPantalla(pantalla);
+    }
+    
+    useEffect(() => {
+        pantalla();
+        botonCalculos();
+    }, [datos]);
+    
     return (
         <View>
             <View style={styles.containerArriba}>
@@ -49,11 +71,12 @@ function IngresoDatos() {
             </View>
             <View style={styles.containerMedio}>
                 {
-                    datos.map((dato, index) => {
-                        return (
-                            <Text key={index} style={{ fontSize: 45, color: (typeof dato == 'number'? 'white' : 'green'), margin:3 }}>{dato}</Text>
-                        )
-                    })
+                    // datos.map((dato, index) => {
+                    //     return (
+                    //         <Text key={index} style={{ fontSize: 45, color: (typeof dato == 'number'? 'white' : 'green'), margin:3 }}>{dato}</Text>
+                    //     )
+                    // })
+                    <Text style={{ fontSize: 45, color: '#aaa', margin: 3 }}>{datosPatalla}</Text>
                 }
             </View>
             <View style={styles.containerAbajo}>
@@ -62,7 +85,7 @@ function IngresoDatos() {
                         <TouchableOpacity style={styles.boton} disabled={!buttonsEnabled} onPress={ () => {botonC()}}>
                             <Text style={{ fontSize: 28, color: 'red' }}>C</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.boton} disabled={!buttonsEnabled} onPress={() => { setDatos([...datos, "back"]); }}>
+                        <TouchableOpacity style={styles.boton} disabled={!buttonsEnabled} onPress={() => { backBotton() }}>
                             <Text style={{ fontSize: 28 }}><Ionicons name="arrow-back" size={22} color="#0ffc03" /></Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.boton} disabled={!buttonsEnabled} onPress={() => { setDatos([...datos, "%"]); }}>
