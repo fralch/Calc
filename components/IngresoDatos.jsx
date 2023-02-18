@@ -17,15 +17,29 @@ function IngresoDatos() {
     const desbloqueandoBotones = (event) => {
         setButtonsEnabled(true);
     }
-    useEffect(() => {
-        // console.log(datos);
-    }, [datos])
-
+   
     const botonC= () => {
         console.log("botonC"); 
         setDatos([]);
     }
 
+    const botonCalculos = () => {
+        let calculos = [];
+        let concatenat = '';
+        datos.forEach(element => {
+            if (typeof element == 'number') {
+                concatenat += element;
+            }
+            if(typeof element == 'string' && element != 'back'){
+                calculos.push(element);
+            }
+        });
+        calculos.push(concatenat);
+        concatenat = '';
+        console.log(calculos);
+        
+
+    }
     return (
         <View>
             <View style={styles.containerArriba}>
@@ -130,7 +144,7 @@ function IngresoDatos() {
                     <TouchableOpacity style={styles.boton} onPress={() => { setDatos([...datos, 0]); }}>
                         <Text style={{ fontSize: 28, color: 'white' }}>0</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={[styles.boton, { width: windowWidth * 0.4 }]} onPress={() => { setDatos([...datos, "="]); }}>
+                    <TouchableOpacity style={[styles.boton, { width: windowWidth * 0.4 }]} onPress={() => { botonCalculos() }}>
                         <Text style={{ fontSize: 28, color: 'red' }}>{"="}</Text>
                     </TouchableOpacity>
 
