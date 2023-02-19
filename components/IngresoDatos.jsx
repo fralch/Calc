@@ -30,19 +30,21 @@ function IngresoDatos() {
         let calculos = [];
         let concatenat = '';
         for (let i = 0; i < datos.length; i++) {
-            if (typeof datos[i] == 'number') {
+            if (typeof datos[i] == 'number' || datos[i]== '.' ) {
                 concatenat += datos[i];
             }
-            if (typeof datos[i] == 'string' && datos[i] != 'back') {
-                calculos.push(concatenat);
+           
+            if (typeof datos[i] == 'string' && datos[i] != 'back' && datos[i] != '.') {
+                calculos.push(parseFloat(concatenat));
                 calculos.push(datos[i]);
                 concatenat = '';
             }
+            
            
         }
-        calculos.push(concatenat);
+        calculos.push(parseFloat(concatenat));
         concatenat = '';
-        
+        console.log(calculos);
         setCalculos(calculos);
     }
     const backBotton = () => {
@@ -73,6 +75,8 @@ function IngresoDatos() {
             if (typeof calculosTemp[i] == 'string') {
                 operador = calculosTemp[i];
             }
+            console.log(typeof calculosTemp[i]); 
+            console.log(operador);
             switch (operador) {
                 case '+':
                     resultado += numero;
@@ -125,7 +129,7 @@ function IngresoDatos() {
             </View>
             <View style={styles.containerMedio}>
                 {
-                    <Text style={{ fontSize: 45, color: '#aaa', margin: 3 }}>{datosPatalla}</Text>
+                    <Text style={{ fontSize: 45, color: '#aaa', margin: 10 }}>{datosPatalla}</Text>
                 }
             </View>
             <View style={styles.containerAbajo}>
