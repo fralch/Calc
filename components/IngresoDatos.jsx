@@ -55,6 +55,11 @@ function IngresoDatos() {
 
     }
 
+    const evaluarDatos = (dato) => {
+        // setDatos([...datos, 8]); 
+        console.log(`dato: ${dato}`);
+    }
+
     const pantalla = () => {
         let pantalla = '';
         for (let i = 0; i < datos.length; i++) {
@@ -62,56 +67,29 @@ function IngresoDatos() {
         }
         setDatosPantalla(pantalla);
     }
+    const sumar = (a, b) => {
+        return a + b;
+    }
+    const restar = (a, b) => {
+        return a - b;
+    }
+    const multiplicar = (a, b) => {
+        return a * b;
+    }
 
     const calcularDatos = () => {
         let calculosTemp = calculos;
         let resultado = 0;
-        let operador = '';
-        let numero = 0;
+
         for (let i = 0; i < calculosTemp.length; i++) {
-            if (typeof calculosTemp[i] == 'number') {
-                numero = calculosTemp[i];
-            }
-            if (typeof calculosTemp[i] == 'string') {
-                operador = calculosTemp[i];
-            }
-            switch (operador) {
-                case '+':
-                    resultado += numero;
-                    break;
-                case '-':
-                    resultado -= numero;
-                    break;
-                case 'x':
-                    resultado *= numero;
-                    break;
-                case '/':
-                    resultado /= numero;
-                    break;
-                case '%':
-                    resultado = (resultado * numero) / 100;
-                    break;
-                case '√':
-                    resultado = Math.sqrt(numero);
-                    break;
-                case '^':
-                    resultado = Math.pow(resultado, numero);
-                    break;
-                case 'x!':
-                    resultado = factorial(numero);
-                    break;
-                case 'π':
-                    resultado = Math.PI * numero;
-                    break;
-                case 'lg':
-                    resultado = Math.log10(numero);
-                    break;
-                case 'ln':
-                    resultado = Math.log(numero);
-                    break;
+            if(typeof calculosTemp[i] == "string"){
+                 
             }
         }
-        console.log(resultado);
+
+        
+        
+        // console.log(resultado);
         setDatos([resultado]);
     }
     
@@ -169,55 +147,55 @@ function IngresoDatos() {
                 </View>
 
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <TouchableOpacity style={styles.boton} onPress={() => { setDatos([...datos, 7]); }} >
+                    <TouchableOpacity style={styles.boton} onPress={() => { evaluarDatos (7) }} >
                         <Text style={{ fontSize: 28, color: 'white' }}>7</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.boton} onPress={() => { setDatos([...datos, 8]); }}>
+                    <TouchableOpacity style={styles.boton} onPress={() => { evaluarDatos(8) }}>
                         <Text style={{ fontSize: 28, color: 'white' }}>8</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.boton} onPress={() => { setDatos([...datos, 9]); }}>
+                    <TouchableOpacity style={styles.boton} onPress={() => { evaluarDatos(9) }}>
                         <Text style={{ fontSize: 28, color: 'white' }}>9</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.boton} onPress={() => { setDatos([...datos, "x"]); }}>
+                    <TouchableOpacity style={styles.boton} onPress={() => { evaluarDatos("x") }}>
                         <Text style={{ fontSize: 28, color: '#0ffc03' }}>x</Text>
                     </TouchableOpacity>
 
                 </View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <TouchableOpacity style={styles.boton} onPress={() => { setDatos([...datos, 4]); }}>
+                    <TouchableOpacity style={styles.boton} onPress={() => { evaluarDatos(4) }}>
                         <Text style={{ fontSize: 28, color: 'white' }}>4</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.boton} onPress={() => { setDatos([...datos, 5]); }}>
+                    <TouchableOpacity style={styles.boton} onPress={() => { evaluarDatos(5) }}>
                         <Text style={{ fontSize: 28, color: 'white' }}>5</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.boton} onPress={() => { setDatos([...datos, 6]); }}>
+                    <TouchableOpacity style={styles.boton} onPress={() => { evaluarDatos(6) }}>
                         <Text style={{ fontSize: 28, color: 'white' }}>6</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.boton} onPress={() => { setDatos([...datos, "-"]); }}>
+                    <TouchableOpacity style={styles.boton} onPress={() => { evaluarDatos("-") }}>
                         <Text style={{ fontSize: 28, color: '#0ffc03' }}>-</Text>
                     </TouchableOpacity>
 
                 </View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <TouchableOpacity style={styles.boton} onPress={() => { setDatos([...datos, 1]); }}>
+                    <TouchableOpacity style={styles.boton} onPress={() => { evaluarDatos(1) }}>
                         <Text style={{ fontSize: 28, color: 'white' }}>1</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.boton} onPress={() => { setDatos([...datos, 2]); }}>
+                    <TouchableOpacity style={styles.boton} onPress={() => { evaluarDatos(2) }}>
                         <Text style={{ fontSize: 28, color: 'white' }}>2</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.boton} onPress={() => { setDatos([...datos, 3]); }}>
+                    <TouchableOpacity style={styles.boton} onPress={() => { evaluarDatos(3) }}>
                         <Text style={{ fontSize: 28, color: 'white' }}>3</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.boton} onPress={() => { setDatos([...datos, "+"]); }}>
+                    <TouchableOpacity style={styles.boton} onPress={() => { evaluarDatos("+") }}>
                         <Text style={{ fontSize: 28, color: '#0ffc03' }}>+</Text>
                     </TouchableOpacity>
 
                 </View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 10 }}>
-                    <TouchableOpacity style={styles.boton} onPress={() => { setDatos([...datos, "."]); }}>
+                    <TouchableOpacity style={styles.boton} onPress={() => { evaluarDatos(".")}}>
                         <Text style={{ fontSize: 28, color: 'white' }}>.</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.boton} onPress={() => { setDatos([...datos, 0]); }}>
+                    <TouchableOpacity style={styles.boton} onPress={() => { evaluarDatos(0)}}>
                         <Text style={{ fontSize: 28, color: 'white' }}>0</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={[styles.boton, { width: windowWidth * 0.4 }]} onPress={() => { calcularDatos() }}>
