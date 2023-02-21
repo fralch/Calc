@@ -75,8 +75,6 @@ function IngresoDatos() {
             if (typeof calculosTemp[i] == 'string') {
                 operador = calculosTemp[i];
             }
-            console.log(typeof calculosTemp[i]); 
-            console.log(operador);
             switch (operador) {
                 case '+':
                     resultado += numero;
