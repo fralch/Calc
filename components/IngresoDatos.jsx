@@ -13,6 +13,8 @@ function IngresoDatos() {
     const [datosPatalla, setDatosPantalla] = useState(null);
     const [calculos, setCalculos] = useState([]);
     const [resultado, setResultado] = useState(0);
+    const [preNumber, setPreNumber] = useState(0);
+    const [postNumber, setPostNumber] = useState(0);
 
     const bloqueandoBotones = (event) => {
         setButtonsEnabled(false);
@@ -56,8 +58,35 @@ function IngresoDatos() {
     }
 
     const evaluarDatos = (dato) => {
-        // setDatos([...datos, 8]); 
-        console.log(`dato: ${dato}`);
+        let respuesta = 0; 
+        if (typeof dato == 'number' && preNumber == 0) {
+            setPreNumber(dato);
+            console.log("prepreNumber: " + preNumber);
+        }
+        if( typeof dato == 'number' && preNumber < 0){
+            setPostNumber(dato);
+        }
+
+        if(typeof dato == "string" && postNumber > 0){
+            if(dato == "+"){
+               respuesta =sumar(preNumber, postNumber);
+            }
+            if(dato == "-"){            
+                respuesta= restar(preNumber, postNumber);
+            }
+            if(dato == "*"){
+                respuesta= multiplicar(preNumber, postNumber);
+            }
+            if(dato == "/"){
+                respuesta = multiplicar(preNumber, postNumber);
+            }
+            
+            
+        }     
+        console.log(`preNumber: ${preNumber}`);
+        console.log(`postNumber: ${postNumber}`); 
+        console.log(`respuesta: ${respuesta}`); 
+        setDatos([...datos, dato]);
     }
 
     const pantalla = () => {
