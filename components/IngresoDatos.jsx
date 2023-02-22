@@ -15,6 +15,7 @@ function IngresoDatos() {
     const [resultado, setResultado] = useState(0);
     const [preNumber, setPreNumber] = useState(0);
     const [postNumber, setPostNumber] = useState(0);
+    const [operacion, setOperacion] = useState(null);
 
     const bloqueandoBotones = (event) => {
         setButtonsEnabled(false);
@@ -58,35 +59,19 @@ function IngresoDatos() {
     }
 
     const evaluarDatos = (dato) => {
-        let respuesta = 0; 
+        setDatos([...datos, dato]);
         if (typeof dato == 'number' && preNumber == 0) {
             setPreNumber(dato);
-            console.log("prepreNumber: " + preNumber);
         }
-        if( typeof dato == 'number' && preNumber < 0){
+        if( typeof dato == 'number' && preNumber != 0 && postNumber == 0){
             setPostNumber(dato);
         }
+        if(typeof dato != 'number' && dato != 'back' && dato != '.' && operacion == null){
+            setOperacion(dato);
+        }
 
-        if(typeof dato == "string" && postNumber > 0){
-            if(dato == "+"){
-               respuesta =sumar(preNumber, postNumber);
-            }
-            if(dato == "-"){            
-                respuesta= restar(preNumber, postNumber);
-            }
-            if(dato == "*"){
-                respuesta= multiplicar(preNumber, postNumber);
-            }
-            if(dato == "/"){
-                respuesta = multiplicar(preNumber, postNumber);
-            }
-            
-            
-        }     
-        console.log(`preNumber: ${preNumber}`);
-        console.log(`postNumber: ${postNumber}`); 
-        console.log(`respuesta: ${respuesta}`); 
-        setDatos([...datos, dato]);
+       
+    
     }
 
     const pantalla = () => {
@@ -107,19 +92,30 @@ function IngresoDatos() {
     }
 
     const calcularDatos = () => {
-        let calculosTemp = calculos;
         let resultado = 0;
+        console.log("preNumber: " + preNumber);
+        console.log("postNumber: " + postNumber);
+        console.log("operacion: " + operacion);
 
-        for (let i = 0; i < calculosTemp.length; i++) {
-            if(typeof calculosTemp[i] == "string"){
-                 
-            }
+        switch (operacion) {
+            case '+':
+                resultado = sumar(preNumber, postNumber);
+                break;
+            case '-':
+                resultado = restar(preNumber, postNumber);
+                break;
+            case 'x':
+                resultado = multiplicar(preNumber, postNumber);
+                break;
+            case '/':
+                resultado = preNumber / postNumber;
+                break;
+            default:
+                break;
         }
+        console.log("resultado: " + resultado);
 
-        
-        
-        // console.log(resultado);
-        setDatos([resultado]);
+       
     }
     
     useEffect(() => {
